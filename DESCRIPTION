@@ -1,0 +1,11 @@
+Package: chppr
+Title: Tools for Developing CHPP Products
+Version: 0.0.0.9000
+Authors@R: person("Aleksandar", "Cvetkovic",
+                  email = "arcvetkovic@protonmail.com",
+                  role = c("aut", "cre"))
+Description: Tools for developing CHPP products.
+Depends: R (>= 3.4.0)
+License: GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
