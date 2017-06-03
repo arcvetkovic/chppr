@@ -31,6 +31,15 @@ oauth_url <- function() {
   )
 }
 
+oauth_header <- function(url, consumer, token = NULL, verifier = NULL) {
+  parameters <- oauth_parameters(url, consumer, token, verifier)
+  authorization <- paste0("OAuth ",
+                          paste0(oauth_encode(names(parameters)), "=\"",
+                                 oauth_encode(parameters), "\"",
+                                 collapse = ", "))
+  httr::add_headers(Authorization = authorization)
+}
+
 oauth_parameters <- function(url, consumer, token = NULL, verifier = NULL) {
   url <- split_url(url)
   parameters <- list(oauth_callback = consumer$callback,
