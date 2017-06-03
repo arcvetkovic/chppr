@@ -30,3 +30,17 @@ oauth_url <- function() {
     protected_resources = "http://chpp.hattrick.org/chppxml.ashx"
   )
 }
+
+split_url <- function(url) {
+  if (length(grep("[?]", url)) > 0) {
+    base <- gsub("(.*)[?](.*)", "\\1", url)
+    query <- gsub("(.*)[?](.*)", "\\2", url)
+    query_fields <- sapply(strsplit(strsplit(query, "&")[[1]], "="), `[`, 1)
+    query_values <- sapply(strsplit(strsplit(query, "&")[[1]], "="), `[`, 2)
+    query <- as.list(stats::setNames(query_values, query_fields))
+  } else {
+    base <- url
+    query <- NULL
+  }
+  list(base = base, query = query)
+}
