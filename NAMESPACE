@@ -2,6 +2,7 @@
 
 S3method(print,consumer)
 S3method(print,token)
+export(authorization_url)
 export(consumer)
 export(oauth_url)
 export(request_token)

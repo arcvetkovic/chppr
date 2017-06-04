@@ -34,3 +34,33 @@ request_token <- function(consumer) {
     stop("Cannot parse request token secret.")
   token(content$oauth_token, content$oauth_token_secret)
 }
+
+#' Authorization URL
+#'
+#' Build an authorization URL.
+#'
+#' @param consumer A consumer, created by \code{\link{consumer}}.
+#' @param request_token A request token, created by \code{\link{request_token}}.
+#'
+#' @return An authorization URL.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # Consumer key and secret below are for illustrative purposes only
+#' cns <- consumer("3qxJ4m36ONdmkQxVES9xW5",
+#'                 "nOhqxax1vDLElZPXgSzYOWIGWbDTQD1BpegtGPz4sCu")
+#' rtkn <- request_token(cns)
+#' aurl <- authorization_url(cns, rtkn)
+#' }
+authorization_url <- function(consumer, request_token) {
+  url <- paste0(oauth_url()$authorize, "?oauth_token=", request_token$token)
+  scope <- c("manage_challenges",
+             "set_matchorder",
+             "manage_youthplayers",
+             "set_training",
+             "place_bid")
+  scope <- scope[as.logical(consumer[4:8])]
+  if (length(scope)) url <- paste0(url, "&scope=", paste(scope, collapse = ","))
+  url
+}
