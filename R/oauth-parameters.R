@@ -80,12 +80,14 @@ split_url <- function(url) {
 }
 
 oauth_encode <- function(x) {
-  x <- unlist(x)
-  if (is.null(x)) return(character())
-  characters <- strsplit(x, "")[[1]]
-  ok <- !grepl("[^A-Za-z0-9_.~-]", characters)
-  if (all(ok)) return(x)
-  characters[!ok] <- sapply(characters[!ok],
-                            function(x) paste0("%", toupper(charToRaw(x))))
-  paste0(characters, collapse = "")
+  encode <- function(x) {
+    x <- as.character(x)
+    characters <- strsplit(x, "")[[1]]
+    ok <- !grepl("[^A-Za-z0-9_.~-]", characters)
+    if (all(ok)) return(x)
+    characters[!ok] <- sapply(characters[!ok],
+                              function(x) paste0("%", toupper(charToRaw(x))))
+    paste0(characters, collapse = "")
+  }
+  sapply(x, encode)
 }
