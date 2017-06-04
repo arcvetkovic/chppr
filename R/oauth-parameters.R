@@ -43,7 +43,7 @@ oauth_header <- function(url, consumer, token = NULL, verifier = NULL) {
 oauth_parameters <- function(url, consumer, token = NULL, verifier = NULL) {
   url <- split_url(url)
   parameters <- list(oauth_callback = consumer$callback,
-                     oauth_consumer_key = consumer$consumer_key,
+                     oauth_consumer_key = consumer$key,
                      oauth_nonce = paste(sample(c(letters, LETTERS, 0:9),
                                                 10, TRUE),
                                          collapse = ""),
