@@ -10,6 +10,7 @@ Imports:
     httr,
     xml2
 Suggests:
+    covr,
     testthat
 License: GPL (>= 2)
 Encoding: UTF-8
