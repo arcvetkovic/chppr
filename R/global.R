@@ -96,9 +96,7 @@ languages <- function(consumer, access_token) {
   query <- "file=worldlanguages&version=1.2"
   xml <- protected_resources(query, consumer, access_token, TRUE)
   nodes <- xml2::xml_find_all(xml, "LanguageList/Language")
-  language_id <- xml_int(nodes, "LanguageID")
-  language_name <- xml_chr(nodes, "LanguageName")
-  data.frame(language_id,
-             language_name,
+  data.frame(language_id = xml_int(nodes, "LanguageID"),
+             language_name = xml_chr(nodes, "LanguageName"),
              stringsAsFactors = FALSE)
 }
